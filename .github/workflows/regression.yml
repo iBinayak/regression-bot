@@ -75,12 +75,12 @@ on:
       channelID:
         type: string
         description: 'Channel ID:'
-        default: edfred
+        default: C065QR80F71
         required: true
       thread_ts:
         type: string
         description: 'Thread TS:'
-        default: 12.2457815
+        default: 1700334395.680659
         required: true
 env:
   EXPERIENCE: ${{ github.event.inputs.experience }}
