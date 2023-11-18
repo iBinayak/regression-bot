@@ -107,7 +107,7 @@ jobs:
         SLACK_APP_TOKEN: ${{ secrets.SLACK_APP_TOKEN }}
       with:
         channel: ${{ env.CHANNELID }}
-        message: 'Hello again <@${U065QR7URCP}>! Regression result here: ${{ env.REPORTURL }}'
+        message: 'Hello again! Regression result for ${{ github.event.inputs.experience }} - ${{ github.event.inputs.environment }} - ${{ github.event.inputs.pageType }} - ${{ github.event.inputs.deviceType }} is here: ${{ env.REPORTURL }}'
         thread-timestamp: ${{ env.THREADTS }}
 
       
