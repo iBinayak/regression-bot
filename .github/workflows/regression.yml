@@ -1,0 +1,117 @@
+name: regression
+on: 
+  workflow_call:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: 'Environment:'
+        default: prod
+        required: true
+        options:
+          - stage
+          - beta
+          - prod
+          - dev
+          - prerelease
+      experience:
+        type: choice
+        description: 'Experience:'
+        default: b2b
+        required: true
+        options:
+          - general-merchandise
+          - hd-home
+          - major-appliances
+          - b2b
+          - promotions
+          - buy-it-again
+          - automotive
+          - non-buyable-services
+          - packages
+          - lists-and-registries
+          - non-buyable-b2b-only-pip
+          - back-in-stock-opt-out
+          - my-homepage
+      pageType:
+        type: choice
+        description: 'PAGE_TYPE:'
+        default: pip
+        required: true
+        options:
+          - pip
+          - plp
+          - pep
+          - b2b
+          - bia
+          - collections
+          - packages
+          - lists
+          - unsubscribe
+          - guest
+          - b2b
+          - b2c
+      deviceType:
+        type: choice
+        description: 'CHANNEL:'
+        default: desktop
+        required: true
+        options:
+          - desktop
+          - mobile
+      version:
+        type: string
+        description: 'VERSION:'
+        default: master
+        required: true
+      browsername:
+        type: choice
+        description: 'Browser:'
+        default: chrome
+        required: true
+        options:
+          - chrome
+          - iphone
+      channelID:
+        type: string
+        description: 'Channel ID:'
+        default: edfred
+        required: true
+      thread_ts:
+        type: string
+        description: 'Thread TS:'
+        default: 12.2457815
+        required: true
+env:
+  EXPERIENCE: ${{ github.event.inputs.experience }}
+  ENVIRONMENT: ${{ github.event.inputs.environment }}
+  PAGETYPE: ${{ github.event.inputs.pageType }}
+  DEVICETYPE: ${{ github.event.inputs.deviceType }}
+  BROWSERNAME: ${{ github.event.inputs.browsername }}
+  CHANNELID: ${{ github.event.inputs.channelID }}
+  THREADTS: ${{ github.event.inputs.thread_ts }}
+
+jobs:
+  runtests:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Print the Environment variables
+      run: |
+        echo "${{ github.event.inputs.experience }}"
+        echo "${{ github.event.inputs.environment }}"
+        echo "${{ github.event.inputs.pageType }}"
+        echo "${{ github.event.inputs.deviceType }}"
+        echo "${{ github.event.inputs.browsername }}"
+        echo "${{ github.event.inputs.channelID }}"
+        echo "${{ github.event.inputs.thread_ts }}"
+        echo "REPORTURL=https://github.com/slackapi/node-tasks-app/blob/main/user-interface/modals/new-task.js" >> $GITHUB_ENV
+    - name: Post Message in Slack Thread
+      uses: hkusu/slack-post-action@v1
+      env: 
+        SLACK_APP_TOKEN: ${{ secrets.SLACK_APP_TOKEN }}
+      with:
+        channel: ${{ env.CHANNELID }}
+        message: 'Regression result here: ${{ env.REPORTURL }}'
+        thread-timestamp: ${{ env.THREADTS }}
+
+      
