@@ -78,8 +78,7 @@ env:
   EXPERIENCE: ${{ github.event.inputs.experience }}
   ENVIRONMENT: ${{ github.event.inputs.environment }}
   PAGETYPE: ${{ github.event.inputs.pageType }}
-  DEVICETYPE: ${{ github.event.inputs.deviceType }}
-  BROWSERNAME: ${{ github.event.inputs.browsername }}
+  DEVICETYPE: ${{ github.event.inputs.deviceType }}  
   CHANNELID: ${{ github.event.inputs.channelID }}
   THREADTS: ${{ github.event.inputs.thread_ts }}
 
@@ -93,8 +92,7 @@ jobs:
         echo "${{ github.event.inputs.experience }}"
         echo "${{ github.event.inputs.environment }}"
         echo "${{ github.event.inputs.pageType }}"
-        echo "${{ github.event.inputs.deviceType }}"
-        echo "${{ github.event.inputs.browsername }}"
+        echo "${{ github.event.inputs.deviceType }}"       
         echo "${{ github.event.inputs.channelID }}"
         echo "${{ github.event.inputs.thread_ts }}"
         echo "REPORTURL=https://github.com/slackapi/node-tasks-app/blob/main/user-interface/modals/new-task.js" >> $GITHUB_ENV
