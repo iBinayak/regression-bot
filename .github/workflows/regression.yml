@@ -93,8 +93,9 @@ env:
 
 jobs:
   runtests:
-  runs-on: ubuntu-latest
-  steps:
+    name: Fetch Environment variables
+    runs-on: ubuntu-latest
+    steps:
     - name: Print the Environment variables
       run: |
         echo "${{ github.event.inputs.experience }}"
