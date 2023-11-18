@@ -63,15 +63,7 @@ on:
         type: string
         description: 'VERSION:'
         default: master
-        required: true
-      browsername:
-        type: choice
-        description: 'Browser:'
-        default: chrome
-        required: true
-        options:
-          - chrome
-          - iphone
+        required: true      
       channelID:
         type: string
         description: 'Channel ID:'
